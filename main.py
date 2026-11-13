@@ -714,23 +714,6 @@ def index(state: State) -> Page:
                 classes="tip-card"
             ),
 
-            # ==================================
-            # FOOTER
-            # ==================================
-
-            Div(
-
-                "Badminton Performance Tracker",
-
-                Div("Train. Track. Improve."),
-
-                Div(
-                    "Designed by Danny Nguyen | 2026"
-                ),
-
-                classes="footer"
-            ),
-
             classes="dashboard"
         )
     ])
