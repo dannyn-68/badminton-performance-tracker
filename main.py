@@ -22,6 +22,187 @@ set_site_information(
 
 
 # ==========================================
+# WEBSITE DECORATION
+# ==========================================
+
+set_website_style("default")
+
+add_website_css("""
+
+    body {
+        background-color: #f0fdf4;
+        font-family: Arial, sans-serif;
+    }
+
+    #drafter-body-- {
+        background-color: #f0fdf4;
+        color: #14532d;
+        padding: 24px;
+    }
+
+    h1 {
+        color: #14532d;
+        font-size: 34px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #166534;
+        font-size: 24px;
+    }
+
+    button {
+        background-color: #15803d;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 22px;
+        margin: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background-color: #166534;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    input, select {
+        background-color: white;
+        border: 1px solid #86efac;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 5px 0 12px 0;
+        font-size: 16px;
+        color: #14532d;
+    }
+
+    input:focus, select:focus {
+        border-color: #16a34a;
+        outline: none;
+        box-shadow: 0 0 5px #86efac;
+    }
+
+    hr {
+        border: none;
+        height: 2px;
+        background-color: #bbf7d0;
+        margin: 24px 0;
+    }
+
+    .hero {
+        background: linear-gradient(
+            135deg, #14532d, #16a34a
+        );
+        color: white;
+        padding: 35px 20px;
+        border-radius: 18px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+    }
+
+    .tagline {
+        text-align: center;
+        color: #16a34a;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+    }
+
+    .intro {
+        text-align: center;
+        color: #166534;
+        font-size: 17px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        background-color: white;
+        border: 1px solid #bbf7d0;
+        border-left: 6px solid #22c55e;
+        border-radius: 12px;
+        padding: 18px;
+        margin: 10px 0;
+        font-size: 20px;
+        font-weight: bold;
+        color: #14532d;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    }
+
+    .goal-card {
+        background-color: #dcfce7;
+        border-radius: 12px;
+        padding: 18px;
+        margin: 12px 0;
+        color: #166534;
+        line-height: 1.6;
+    }
+
+    .success-card {
+        background-color: #dcfce7;
+        border: 1px solid #86efac;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        color: #166534;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .error-card {
+        background-color: #fef2f2;
+        border: 1px solid #fca5a5;
+        border-radius: 12px;
+        padding: 18px;
+        margin: 15px 0;
+        color: #991b1b;
+    }
+
+    .match-card {
+        background-color: white;
+        border: 1px solid #bbf7d0;
+        border-radius: 12px;
+        padding: 15px;
+        margin: 10px 0;
+        color: #14532d;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    }
+
+    .win-label {
+        background-color: #dcfce7;
+        color: #166534;
+        border-radius: 8px;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .loss-label {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border-radius: 8px;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .footer {
+        text-align: center;
+        color: #64748b;
+        font-size: 13px;
+        padding: 20px;
+        margin-top: 25px;
+    }
+
+""")
+
+
+# ==========================================
 # DATACLASSES
 # ==========================================
 
@@ -55,6 +236,7 @@ class State:
 def index(state: State) -> Page:
 
     # Calculate wins and losses.
+
     wins = 0
     losses = 0
 
@@ -65,44 +247,105 @@ def index(state: State) -> Page:
             losses += 1
 
     # Calculate win percentage.
+
     win_rate = 0.0
 
     if len(state.matches) > 0:
         win_rate = wins / len(state.matches) * 100
 
     return Page(state, [
+
         Header("🏸 Badminton Performance Tracker"),
 
-        "Welcome, " + state.player_name + "!",
+        Text(
+            "TRACK. ANALYZE. IMPROVE.",
+            classes="tagline"
+        ),
 
-        "Track your badminton matches, analyze your "
-        "performance, and improve your skills.",
+        # Welcome banner
+
+        Text(
+            "Welcome, " + state.player_name + "!",
+            classes="hero",
+            style_font_size="30px",
+            style_font_weight="bold"
+        ),
+
+        Text(
+            "Every match is a chance to improve. "
+            "Track your performance and take your "
+            "badminton skills to the next level.",
+            classes="intro"
+        ),
 
         HorizontalRule(),
 
-        Header("Your Progress"),
+        # Performance overview
 
-        "Matches Recorded: " + str(len(state.matches)),
+        Header("📊 Performance Overview"),
 
-        "Wins: " + str(wins),
+        Text(
+            "🏸 Matches Played: "
+            + str(len(state.matches)),
+            classes="stat-card"
+        ),
 
-        "Losses: " + str(losses),
+        Text(
+            "🏆 Total Wins: " + str(wins),
+            classes="stat-card"
+        ),
 
-        "Win Rate: " + str(round(win_rate, 2)) + "%",
+        Text(
+            "🎯 Total Losses: " + str(losses),
+            classes="stat-card"
+        ),
 
-        "Training Goal: " + state.goal,
-
-        "Favorite Shot: " + state.favorite_shot,
+        Text(
+            "📈 Win Rate: "
+            + str(round(win_rate, 2)) + "%",
+            classes="stat-card"
+        ),
 
         HorizontalRule(),
 
-        Button("Record Match", record_match),
+        # Navigation
 
-        Button("Match History", match_history),
+        Header("⚡ Quick Navigation"),
 
-        Button("Performance Statistics", statistics),
+        Button("📝 Record Match", record_match),
 
-        Button("My Profile", profile)
+        Button("📋 Match History", match_history),
+
+        Button("📊 Performance Statistics", statistics),
+
+        Button("💡 Strategy Tips", strategy_tips),
+
+        Button("👤 My Profile", profile),
+
+        HorizontalRule(),
+
+        # Player information
+
+        Header("🎯 Your Training Journey"),
+
+        Text(
+            "Training Goal: " + state.goal,
+            classes="goal-card"
+        ),
+
+        Text(
+            "Favorite Shot: " + state.favorite_shot,
+            classes="goal-card"
+        ),
+
+        # Footer
+
+        Text(
+            "🏸 Badminton Performance Tracker | "
+            "Created by Danny Nguyen | "
+            "Built with Python & Drafter",
+            classes="footer"
+        )
     ])
 
 
@@ -114,11 +357,16 @@ def index(state: State) -> Page:
 def record_match(state: State) -> Page:
 
     return Page(state, [
-        Header("Record a Match"),
 
-        "Enter your match statistics below.",
+        Header("📝 Record a Match"),
 
-        Header("Match Information"),
+        Text(
+            "Enter your latest match results and track "
+            "your progress on the court.",
+            classes="goal-card"
+        ),
+
+        Header("🏸 Match Information"),
 
         "Opponent:",
         TextBox("opponent", ""),
@@ -131,7 +379,7 @@ def record_match(state: State) -> Page:
 
         HorizontalRule(),
 
-        Header("Point Statistics"),
+        Header("🎯 Point Statistics"),
 
         "Points Won:",
         TextBox("points_won", "0"),
@@ -144,7 +392,7 @@ def record_match(state: State) -> Page:
 
         HorizontalRule(),
 
-        Header("Smash Statistics"),
+        Header("💥 Smash Statistics"),
 
         "Total Smashes:",
         TextBox("total_smashes", "0"),
@@ -154,7 +402,7 @@ def record_match(state: State) -> Page:
 
         HorizontalRule(),
 
-        Header("Serve Statistics"),
+        Header("🏸 Serve Statistics"),
 
         "Total Serves:",
         TextBox("total_serves", "0"),
@@ -164,9 +412,15 @@ def record_match(state: State) -> Page:
 
         HorizontalRule(),
 
-        Button("Save Match", save_match),
+        Button("💾 Save Match", save_match),
 
-        Button("Back to Home", index)
+        Button("🏠 Back to Home", index),
+
+        Text(
+            "Record your statistics after every match "
+            "to see how much you improve over time.",
+            classes="footer"
+        )
     ])
 
 
@@ -190,10 +444,8 @@ def save_match(
 ) -> Page:
 
     # Advanced technique: Exception handling.
-    # TextBox inputs are strings.
-    # Convert the strings into integers.
-    # If the user enters invalid text, catch the
-    # ValueError and display an error page.
+    # Convert TextBox strings into integers.
+    # Catch invalid inputs instead of crashing.
 
     try:
         won = int(points_won)
@@ -206,9 +458,14 @@ def save_match(
 
     except ValueError:
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Please enter whole numbers for all statistics.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Please enter whole numbers "
+                "for all statistics.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match),
 
@@ -219,9 +476,13 @@ def save_match(
 
     if opponent.strip() == "":
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Please enter your opponent's name.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Please enter your opponent's name.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
@@ -230,9 +491,13 @@ def save_match(
 
     if date.strip() == "":
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Please enter the match date.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Please enter the match date.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
@@ -241,56 +506,77 @@ def save_match(
 
     if result != "Win" and result != "Loss":
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Please select Win or Loss.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Please select Win or Loss.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
 
-    # Check the point statistics.
+    # Check point statistics.
 
     if total <= 0 or won < 0 or won > total:
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Points won must be between 0 and total points. "
-            "Total points must be greater than zero.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Points won must be between 0 "
+                "and total points. Total points "
+                "must be greater than zero.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
 
-    # Check the error count.
+    # Check the number of errors.
 
     if error_count < 0:
         return Page(state, [
-            Header("Invalid Input"),
 
-            "The number of errors cannot be negative.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "The number of errors cannot be negative.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
 
-    # Check the smash statistics.
+    # Check smash statistics.
 
     if smashes < 0 or good_smashes < 0 or good_smashes > smashes:
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Successful smashes must be between "
-            "0 and total smashes.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Successful smashes must be between "
+                "0 and total smashes.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
 
-    # Check the serve statistics.
+    # Check serve statistics.
 
     if serves < 0 or good_serves < 0 or good_serves > serves:
         return Page(state, [
-            Header("Invalid Input"),
 
-            "Successful serves must be between "
-            "0 and total serves.",
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Successful serves must be between "
+                "0 and total serves.",
+                classes="error-card"
+            ),
 
             Button("Try Again", record_match)
         ])
@@ -314,39 +600,56 @@ def save_match(
 
     state.matches.append(new_match)
 
-    # Display a message based on the match result.
+    # Meaningful conditional:
+    # Display a message based on the result.
 
     if result == "Win":
-        message = "Congratulations on your win!"
+        message = "🏆 Congratulations on your win!"
     else:
-        message = "Keep practicing and improving!"
+        message = "💪 Keep practicing and improving!"
 
     return Page(state, [
-        Header("Match Saved!"),
 
-        "Your match against " + opponent
-        + " has been successfully recorded.",
+        Header("🎉 Match Saved Successfully!"),
 
-        HorizontalRule(),
-
-        "Match Date: " + date,
-
-        "Match Result: " + result,
-
-        message,
-
-        "Total Matches Recorded: "
-        + str(len(state.matches)),
+        Text(
+            "Your match against " + opponent
+            + " has been successfully recorded.",
+            classes="success-card"
+        ),
 
         HorizontalRule(),
 
-        Button("Record Another Match", record_match),
+        Text(
+            "📅 Match Date: " + date,
+            classes="match-card"
+        ),
 
-        Button("View Match History", match_history),
+        Text(
+            "🏸 Match Result: " + result,
+            classes="match-card"
+        ),
 
-        Button("View Statistics", statistics),
+        Text(
+            message,
+            classes="goal-card"
+        ),
 
-        Button("Back to Home", index)
+        Text(
+            "Total Matches Recorded: "
+            + str(len(state.matches)),
+            classes="stat-card"
+        ),
+
+        HorizontalRule(),
+
+        Button("📝 Record Another Match", record_match),
+
+        Button("📋 View Match History", match_history),
+
+        Button("📊 View Statistics", statistics),
+
+        Button("🏠 Back to Home", index)
     ])
 
 
@@ -358,71 +661,106 @@ def save_match(
 def match_history(state: State) -> Page:
 
     content = [
-        Header("Match History"),
 
-        "Review your previously recorded matches."
+        Header("📋 Match History"),
+
+        Text(
+            "Review your previously recorded matches "
+            "and celebrate your progress.",
+            classes="goal-card"
+        )
     ]
 
-    # Check whether the user has saved any matches.
+    # Check whether there are any matches.
 
     if len(state.matches) == 0:
+
         content.append(
-            "You have not recorded any matches yet."
+            Text(
+                "You have not recorded any matches yet. "
+                "Record your first match to get started!",
+                classes="match-card"
+            )
         )
 
     match_number = 1
 
     # Meaningful loop:
-    # Iterate over the list of Match instances in State.
-    # Display the statistics of every recorded match.
+    # Iterate over Match instances in State.
+    # Display the statistics of every match.
 
     for match in state.matches:
 
         content.append(HorizontalRule())
 
         content.append(
-            Header("Match " + str(match_number))
+            Header("🏸 Match " + str(match_number))
         )
 
         content.append(
-            "Opponent: " + match.opponent
+            Text(
+                "Opponent: " + match.opponent,
+                classes="match-card"
+            )
         )
 
         content.append(
-            "Date: " + match.date
+            Text(
+                "📅 Date: " + match.date,
+                classes="match-card"
+            )
+        )
+
+        # Display wins in green and losses in red.
+
+        if match.result == "Win":
+            content.append(
+                Text(
+                    "🏆 Result: WIN",
+                    classes="win-label"
+                )
+            )
+
+        else:
+            content.append(
+                Text(
+                    "Result: LOSS",
+                    classes="loss-label"
+                )
+            )
+
+        content.append(
+            Text(
+                "🎯 Points Won: "
+                + str(match.points_won)
+                + "/" + str(match.total_points),
+                classes="match-card"
+            )
         )
 
         content.append(
-            "Result: " + match.result
+            Text(
+                "Errors: " + str(match.errors),
+                classes="match-card"
+            )
         )
 
         content.append(
-            "Points Won: " + str(match.points_won)
-            + "/" + str(match.total_points)
+            Text(
+                "💥 Successful Smashes: "
+                + str(match.successful_smashes)
+                + "/" + str(match.total_smashes),
+                classes="match-card"
+            )
         )
 
         content.append(
-            "Errors: " + str(match.errors)
-        )
-
-        content.append(
-            "Total Smashes: "
-            + str(match.total_smashes)
-        )
-
-        content.append(
-            "Successful Smashes: "
-            + str(match.successful_smashes)
-        )
-
-        content.append(
-            "Total Serves: "
-            + str(match.total_serves)
-        )
-
-        content.append(
-            "Successful Serves: "
-            + str(match.successful_serves)
+            Text(
+                "🏸 Successful Serves: "
+                + str(match.successful_serves)
+                + "/" + str(match.total_serves),
+                classes="match-card"
+            )
         )
 
         match_number += 1
@@ -430,15 +768,15 @@ def match_history(state: State) -> Page:
     content.append(HorizontalRule())
 
     content.append(
-        Button("Record Match", record_match)
+        Button("📝 Record Match", record_match)
     )
 
     content.append(
-        Button("Performance Statistics", statistics)
+        Button("📊 Performance Statistics", statistics)
     )
 
     content.append(
-        Button("Back to Home", index)
+        Button("🏠 Back to Home", index)
     )
 
     return Page(state, content)
@@ -454,14 +792,20 @@ def statistics(state: State) -> Page:
     # Prevent calculations when there are no matches.
 
     if len(state.matches) == 0:
+
         return Page(state, [
-            Header("Performance Statistics"),
 
-            "Record a match to view your statistics.",
+            Header("📊 Performance Statistics"),
 
-            Button("Record Match", record_match),
+            Text(
+                "Record a match to unlock your "
+                "performance statistics!",
+                classes="goal-card"
+            ),
 
-            Button("Back to Home", index)
+            Button("📝 Record Match", record_match),
+
+            Button("🏠 Back to Home", index)
         ])
 
     # Initialize integer totals.
@@ -477,7 +821,7 @@ def statistics(state: State) -> Page:
     successful_serves = 0
 
     # Meaningful loop:
-    # Calculate the total statistics from all matches.
+    # Calculate statistics from all recorded matches.
 
     for match in state.matches:
 
@@ -509,7 +853,6 @@ def statistics(state: State) -> Page:
     point_rate = points_won / total_points * 100
 
     # Calculate smash success rate.
-    # Check the denominator to avoid division by zero.
 
     smash_rate = 0.0
 
@@ -527,92 +870,380 @@ def statistics(state: State) -> Page:
 
     average_errors = errors / len(state.matches)
 
-    # Calculate error percentage.
+    # Calculate errors per 100 points.
 
     error_rate = errors / total_points * 100
 
     return Page(state, [
-        Header("Performance Statistics"),
 
-        Header("Match Overview"),
+        Header("📊 Performance Statistics"),
 
-        "Total Matches: " + str(len(state.matches)),
+        Text(
+            "Understand your strengths and discover "
+            "opportunities to improve your game.",
+            classes="goal-card"
+        ),
 
-        "Wins: " + str(wins),
+        Header("🏆 Match Overview"),
 
-        "Losses: " + str(losses),
+        Text(
+            "Total Matches: "
+            + str(len(state.matches)),
+            classes="stat-card"
+        ),
 
-        "Win Rate: "
-        + str(round(win_rate, 2)) + "%",
+        Text(
+            "Wins: " + str(wins),
+            classes="stat-card"
+        ),
 
-        HorizontalRule(),
+        Text(
+            "Losses: " + str(losses),
+            classes="stat-card"
+        ),
 
-        Header("Point Statistics"),
-
-        "Total Points Won: " + str(points_won),
-
-        "Total Points Played: " + str(total_points),
-
-        "Point Win Rate: "
-        + str(round(point_rate, 2)) + "%",
-
-        HorizontalRule(),
-
-        Header("Smash Statistics"),
-
-        "Total Smashes: " + str(total_smashes),
-
-        "Successful Smashes: " + str(successful_smashes),
-
-        "Smash Success Rate: "
-        + str(round(smash_rate, 2)) + "%",
+        Text(
+            "Win Rate: "
+            + str(round(win_rate, 2)) + "%",
+            classes="stat-card"
+        ),
 
         HorizontalRule(),
 
-        Header("Serve Statistics"),
+        Header("🎯 Point Statistics"),
 
-        "Total Serves: " + str(total_serves),
+        Text(
+            "Total Points Won: " + str(points_won),
+            classes="match-card"
+        ),
 
-        "Successful Serves: " + str(successful_serves),
+        Text(
+            "Total Points Played: " + str(total_points),
+            classes="match-card"
+        ),
 
-        "Serve Success Rate: "
-        + str(round(serve_rate, 2)) + "%",
-
-        HorizontalRule(),
-
-        Header("Error Statistics"),
-
-        "Total Errors: " + str(errors),
-
-        "Average Errors per Match: "
-        + str(round(average_errors, 2)),
-
-        "Error Percentage: "
-        + str(round(error_rate, 2)) + "%",
+        Text(
+            "Point Win Rate: "
+            + str(round(point_rate, 2)) + "%",
+            classes="stat-card"
+        ),
 
         HorizontalRule(),
 
-        Button("Match History", match_history),
+        Header("💥 Smash Statistics"),
 
-        Button("Record Match", record_match),
+        Text(
+            "Total Smashes: " + str(total_smashes),
+            classes="match-card"
+        ),
 
-        Button("Back to Home", index)
+        Text(
+            "Successful Smashes: "
+            + str(successful_smashes),
+            classes="match-card"
+        ),
+
+        Text(
+            "Smash Success Rate: "
+            + str(round(smash_rate, 2)) + "%",
+            classes="stat-card"
+        ),
+
+        HorizontalRule(),
+
+        Header("🏸 Serve Statistics"),
+
+        Text(
+            "Total Serves: " + str(total_serves),
+            classes="match-card"
+        ),
+
+        Text(
+            "Successful Serves: "
+            + str(successful_serves),
+            classes="match-card"
+        ),
+
+        Text(
+            "Serve Success Rate: "
+            + str(round(serve_rate, 2)) + "%",
+            classes="stat-card"
+        ),
+
+        HorizontalRule(),
+
+        Header("⚠️ Error Statistics"),
+
+        Text(
+            "Total Errors: " + str(errors),
+            classes="match-card"
+        ),
+
+        Text(
+            "Average Errors per Match: "
+            + str(round(average_errors, 2)),
+            classes="stat-card"
+        ),
+
+        Text(
+            "Errors per 100 Points: "
+            + str(round(error_rate, 2)),
+            classes="stat-card"
+        ),
+
+        HorizontalRule(),
+
+        Button("💡 View Strategy Tips", strategy_tips),
+
+        Button("📋 Match History", match_history),
+
+        Button("📝 Record Match", record_match),
+
+        Button("🏠 Back to Home", index)
     ])
 
 
 # ==========================================
-# ROUTE 6: PROFILE PAGE
+# ROUTE 6: STRATEGY TIPS PAGE
+# ==========================================
+
+@route
+def strategy_tips(state: State) -> Page:
+
+    # Check whether there are recorded matches.
+
+    if len(state.matches) == 0:
+
+        return Page(state, [
+
+            Header("💡 Strategy Tips"),
+
+            Text(
+                "Record your first match to receive "
+                "personalized training recommendations.",
+                classes="goal-card"
+            ),
+
+            Button("📝 Record Match", record_match),
+
+            Button("🏠 Back to Home", index)
+        ])
+
+    # Initialize totals.
+
+    total_smashes = 0
+    successful_smashes = 0
+    total_serves = 0
+    successful_serves = 0
+    total_errors = 0
+
+    # Calculate totals from all matches.
+
+    for match in state.matches:
+
+        total_smashes += match.total_smashes
+
+        successful_smashes += match.successful_smashes
+
+        total_serves += match.total_serves
+
+        successful_serves += match.successful_serves
+
+        total_errors += match.errors
+
+    # Calculate smash success rate.
+
+    smash_rate = 0.0
+
+    if total_smashes > 0:
+        smash_rate = successful_smashes / total_smashes * 100
+
+    # Calculate serve success rate.
+
+    serve_rate = 0.0
+
+    if total_serves > 0:
+        serve_rate = successful_serves / total_serves * 100
+
+    # Calculate average errors.
+
+    average_errors = total_errors / len(state.matches)
+
+    content = [
+
+        Header("💡 Personalized Strategy Tips"),
+
+        Text(
+            "These recommendations are based on "
+            "your recorded match statistics.",
+            classes="goal-card"
+        ),
+
+        Header("💥 Improve Your Smash")
+    ]
+
+    # Meaningful conditional:
+    # Recommend smash practice if accuracy is below 60%.
+
+    if total_smashes == 0:
+
+        content.append(
+            Text(
+                "Record some smashes to receive "
+                "smash-specific recommendations.",
+                classes="goal-card"
+            )
+        )
+
+    elif smash_rate < 60:
+
+        content.append(
+            Text(
+                "Your smash success rate is "
+                + str(round(smash_rate, 2))
+                + "%. Focus on timing, placement, "
+                "and accuracy before increasing power.",
+                classes="goal-card"
+            )
+        )
+
+    else:
+
+        content.append(
+            Text(
+                "Great job! Your smash success rate is "
+                + str(round(smash_rate, 2))
+                + "%. Keep improving your placement "
+                "and shot selection.",
+                classes="success-card"
+            )
+        )
+
+    content.append(HorizontalRule())
+
+    content.append(
+        Header("🏸 Improve Your Serve")
+    )
+
+    # Meaningful conditional:
+    # Recommend serve practice if success is below 80%.
+
+    if total_serves == 0:
+
+        content.append(
+            Text(
+                "Record some serves to receive "
+                "serve-specific recommendations.",
+                classes="goal-card"
+            )
+        )
+
+    elif serve_rate < 80:
+
+        content.append(
+            Text(
+                "Your serve success rate is "
+                + str(round(serve_rate, 2))
+                + "%. Practice consistent low serves "
+                "and focus on accuracy.",
+                classes="goal-card"
+            )
+        )
+
+    else:
+
+        content.append(
+            Text(
+                "Excellent serving! Your success rate is "
+                + str(round(serve_rate, 2))
+                + "%. Keep practicing different "
+                "serve placements.",
+                classes="success-card"
+            )
+        )
+
+    content.append(HorizontalRule())
+
+    content.append(
+        Header("🎯 Reduce Your Errors")
+    )
+
+    # Meaningful conditional:
+    # Recommend reducing errors if average exceeds 10.
+
+    if average_errors > 10:
+
+        content.append(
+            Text(
+                "You average "
+                + str(round(average_errors, 2))
+                + " errors per match. Focus on "
+                "consistent footwork, safer shots, "
+                "and reducing unforced errors.",
+                classes="goal-card"
+            )
+        )
+
+    else:
+
+        content.append(
+            Text(
+                "Good consistency! You average "
+                + str(round(average_errors, 2))
+                + " errors per match. Keep focusing "
+                "on controlled and accurate shots.",
+                classes="success-card"
+            )
+        )
+
+    content.append(HorizontalRule())
+
+    content.append(
+        Header("🔥 Your Training Goal")
+    )
+
+    content.append(
+        Text(
+            state.goal,
+            classes="stat-card"
+        )
+    )
+
+    content.append(
+        Button("📊 View Statistics", statistics)
+    )
+
+    content.append(
+        Button("👤 Update Training Goal", profile)
+    )
+
+    content.append(
+        Button("🏠 Back to Home", index)
+    )
+
+    return Page(state, content)
+
+
+# ==========================================
+# ROUTE 7: PROFILE PAGE
 # ==========================================
 
 @route
 def profile(state: State) -> Page:
 
     return Page(state, [
-        Header("My Profile"),
 
-        "Personalize your badminton profile.",
+        Header("👤 My Player Profile"),
+
+        Text(
+            "Customize your player information "
+            "and set your personal badminton goals.",
+            classes="goal-card"
+        ),
 
         HorizontalRule(),
+
+        Header("🏸 Player Information"),
 
         "Player Name:",
         TextBox("player_name", state.player_name),
@@ -635,14 +1266,14 @@ def profile(state: State) -> Page:
 
         HorizontalRule(),
 
-        Button("Save Profile", save_profile),
+        Button("💾 Save Profile", save_profile),
 
-        Button("Back to Home", index)
+        Button("🏠 Back to Home", index)
     ])
 
 
 # ==========================================
-# ROUTE 7: SAVE PROFILE
+# ROUTE 8: SAVE PROFILE
 # ==========================================
 
 @route
@@ -656,10 +1287,15 @@ def save_profile(
     # Check whether the player entered a name.
 
     if player_name.strip() == "":
-        return Page(state, [
-            Header("Invalid Input"),
 
-            "Please enter your name.",
+        return Page(state, [
+
+            Header("⚠️ Invalid Input"),
+
+            Text(
+                "Please enter your name.",
+                classes="error-card"
+            ),
 
             Button("Back to Profile", profile)
         ])
@@ -673,23 +1309,36 @@ def save_profile(
     state.favorite_shot = favorite_shot
 
     return Page(state, [
-        Header("Profile Updated!"),
 
-        "Your profile has been successfully saved.",
+        Header("🎉 Profile Updated!"),
 
-        HorizontalRule(),
-
-        "Player Name: " + state.player_name,
-
-        "Training Goal: " + state.goal,
-
-        "Favorite Shot: " + state.favorite_shot,
+        Text(
+            "Your profile has been successfully saved.",
+            classes="success-card"
+        ),
 
         HorizontalRule(),
 
-        Button("Back to Home", index),
+        Text(
+            "👤 Player Name: " + state.player_name,
+            classes="stat-card"
+        ),
 
-        Button("Edit Profile", profile)
+        Text(
+            "🎯 Training Goal: " + state.goal,
+            classes="goal-card"
+        ),
+
+        Text(
+            "🏸 Favorite Shot: " + state.favorite_shot,
+            classes="goal-card"
+        ),
+
+        HorizontalRule(),
+
+        Button("🏠 Back to Home", index),
+
+        Button("✏️ Edit Profile", profile)
     ])
 
 
