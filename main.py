@@ -28,6 +28,8 @@ set_site_information(
 @dataclass
 class Match:
     opponent: str
+    date: str
+    result: str
     points_won: int
     total_points: int
     errors: int
@@ -51,21 +53,48 @@ class State:
 
 @route
 def index(state: State) -> Page:
+
+    # Calculate wins and losses.
+    wins = 0
+    losses = 0
+
+    for match in state.matches:
+        if match.result == "Win":
+            wins += 1
+        else:
+            losses += 1
+
+    # Calculate win percentage.
+    win_rate = 0.0
+
+    if len(state.matches) > 0:
+        win_rate = wins / len(state.matches) * 100
+
     return Page(state, [
-        Header("Badminton Performance Tracker"),
+        Header("🏸 Badminton Performance Tracker"),
 
         "Welcome, " + state.player_name + "!",
 
         "Track your badminton matches, analyze your "
         "performance, and improve your skills.",
 
+        HorizontalRule(),
+
         Header("Your Progress"),
 
         "Matches Recorded: " + str(len(state.matches)),
 
+        "Wins: " + str(wins),
+
+        "Losses: " + str(losses),
+
+        "Win Rate: " + str(round(win_rate, 2)) + "%",
+
         "Training Goal: " + state.goal,
 
         "Favorite Shot: " + state.favorite_shot,
+
+        HorizontalRule(),
 
         Button("Record Match", record_match),
 
@@ -83,13 +112,26 @@ def index(state: State) -> Page:
 
 @route
 def record_match(state: State) -> Page:
+
     return Page(state, [
         Header("Record a Match"),
 
         "Enter your match statistics below.",
 
+        Header("Match Information"),
+
         "Opponent:",
         TextBox("opponent", ""),
+
+        "Match Date (MM/DD/YYYY):",
+        TextBox("date", ""),
+
+        "Match Result:",
+        SelectBox("result", ["Win", "Loss"], "Win"),
+
+        HorizontalRule(),
+
+        Header("Point Statistics"),
 
         "Points Won:",
         TextBox("points_won", "0"),
@@ -100,17 +142,27 @@ def record_match(state: State) -> Page:
         "Errors:",
         TextBox("errors", "0"),
 
+        HorizontalRule(),
+
+        Header("Smash Statistics"),
+
         "Total Smashes:",
         TextBox("total_smashes", "0"),
 
         "Successful Smashes:",
         TextBox("successful_smashes", "0"),
 
+        HorizontalRule(),
+
+        Header("Serve Statistics"),
+
         "Total Serves:",
         TextBox("total_serves", "0"),
 
         "Successful Serves:",
         TextBox("successful_serves", "0"),
+
+        HorizontalRule(),
 
         Button("Save Match", save_match),
 
@@ -126,6 +178,8 @@ def record_match(state: State) -> Page:
 def save_match(
     state: State,
     opponent: str,
+    date: str,
+    result: str,
     points_won: str,
     total_points: str,
     errors: str,
@@ -137,11 +191,9 @@ def save_match(
 
     # Advanced technique: Exception handling.
     # TextBox inputs are strings.
-    # The try block converts the strings into integers.
-    # If the user enters invalid text, int() raises
-    # a ValueError. The except block catches the error
-    # and returns an error page instead of crashing.
-    # Separate integer variables prevent type errors.
+    # Convert the strings into integers.
+    # If the user enters invalid text, catch the
+    # ValueError and display an error page.
 
     try:
         won = int(points_won)
@@ -165,11 +217,33 @@ def save_match(
 
     # Check the opponent's name.
 
-    if opponent == "":
+    if opponent.strip() == "":
         return Page(state, [
             Header("Invalid Input"),
 
             "Please enter your opponent's name.",
+
+            Button("Try Again", record_match)
+        ])
+
+    # Check the match date.
+
+    if date.strip() == "":
+        return Page(state, [
+            Header("Invalid Input"),
+
+            "Please enter the match date.",
+
+            Button("Try Again", record_match)
+        ])
+
+    # Check the match result.
+
+    if result != "Win" and result != "Loss":
+        return Page(state, [
+            Header("Invalid Input"),
+
+            "Please select Win or Loss.",
 
             Button("Try Again", record_match)
         ])
@@ -225,6 +299,8 @@ def save_match(
 
     new_match = Match(
         opponent,
+        date,
+        result,
         won,
         total,
         error_count,
@@ -238,14 +314,31 @@ def save_match(
 
     state.matches.append(new_match)
 
+    # Display a message based on the match result.
+
+    if result == "Win":
+        message = "Congratulations on your win!"
+    else:
+        message = "Keep practicing and improving!"
+
     return Page(state, [
         Header("Match Saved!"),
 
         "Your match against " + opponent
         + " has been successfully recorded.",
 
+        HorizontalRule(),
+
+        "Match Date: " + date,
+
+        "Match Result: " + result,
+
+        message,
+
         "Total Matches Recorded: "
         + str(len(state.matches)),
+
+        HorizontalRule(),
 
         Button("Record Another Match", record_match),
 
@@ -285,12 +378,22 @@ def match_history(state: State) -> Page:
 
     for match in state.matches:
 
+        content.append(HorizontalRule())
+
         content.append(
             Header("Match " + str(match_number))
         )
 
         content.append(
             "Opponent: " + match.opponent
+        )
+
+        content.append(
+            "Date: " + match.date
+        )
+
+        content.append(
+            "Result: " + match.result
         )
 
         content.append(
@@ -323,6 +426,8 @@ def match_history(state: State) -> Page:
         )
 
         match_number += 1
+
+    content.append(HorizontalRule())
 
     content.append(
         Button("Record Match", record_match)
@@ -361,6 +466,8 @@ def statistics(state: State) -> Page:
 
     # Initialize integer totals.
 
+    wins = 0
+    losses = 0
     points_won = 0
     total_points = 0
     errors = 0
@@ -373,6 +480,11 @@ def statistics(state: State) -> Page:
     # Calculate the total statistics from all matches.
 
     for match in state.matches:
+
+        if match.result == "Win":
+            wins += 1
+        else:
+            losses += 1
 
         points_won += match.points_won
 
@@ -388,17 +500,23 @@ def statistics(state: State) -> Page:
 
         successful_serves += match.successful_serves
 
-    # Calculate point win rate.
+    # Calculate match win percentage.
+
+    win_rate = wins / len(state.matches) * 100
+
+    # Calculate point win percentage.
 
     point_rate = points_won / total_points * 100
 
-    # Initialize rates as floats to avoid type errors.
+    # Calculate smash success rate.
     # Check the denominator to avoid division by zero.
 
     smash_rate = 0.0
 
     if total_smashes > 0:
         smash_rate = successful_smashes / total_smashes * 100
+
+    # Calculate serve success rate.
 
     serve_rate = 0.0
 
@@ -409,10 +527,25 @@ def statistics(state: State) -> Page:
 
     average_errors = errors / len(state.matches)
 
+    # Calculate error percentage.
+
+    error_rate = errors / total_points * 100
+
     return Page(state, [
         Header("Performance Statistics"),
 
+        Header("Match Overview"),
+
         "Total Matches: " + str(len(state.matches)),
+
+        "Wins: " + str(wins),
+
+        "Losses: " + str(losses),
+
+        "Win Rate: "
+        + str(round(win_rate, 2)) + "%",
+
+        HorizontalRule(),
 
         Header("Point Statistics"),
 
@@ -423,6 +556,8 @@ def statistics(state: State) -> Page:
         "Point Win Rate: "
         + str(round(point_rate, 2)) + "%",
 
+        HorizontalRule(),
+
         Header("Smash Statistics"),
 
         "Total Smashes: " + str(total_smashes),
@@ -431,6 +566,8 @@ def statistics(state: State) -> Page:
 
         "Smash Success Rate: "
         + str(round(smash_rate, 2)) + "%",
+
+        HorizontalRule(),
 
         Header("Serve Statistics"),
 
@@ -441,12 +578,19 @@ def statistics(state: State) -> Page:
         "Serve Success Rate: "
         + str(round(serve_rate, 2)) + "%",
 
+        HorizontalRule(),
+
         Header("Error Statistics"),
 
         "Total Errors: " + str(errors),
 
         "Average Errors per Match: "
         + str(round(average_errors, 2)),
+
+        "Error Percentage: "
+        + str(round(error_rate, 2)) + "%",
+
+        HorizontalRule(),
 
         Button("Match History", match_history),
 
@@ -468,6 +612,8 @@ def profile(state: State) -> Page:
 
         "Personalize your badminton profile.",
 
+        HorizontalRule(),
+
         "Player Name:",
         TextBox("player_name", state.player_name),
 
@@ -486,6 +632,8 @@ def profile(state: State) -> Page:
             ],
             state.favorite_shot
         ),
+
+        HorizontalRule(),
 
         Button("Save Profile", save_profile),
 
@@ -507,7 +655,7 @@ def save_profile(
 
     # Check whether the player entered a name.
 
-    if player_name == "":
+    if player_name.strip() == "":
         return Page(state, [
             Header("Invalid Input"),
 
@@ -529,11 +677,15 @@ def save_profile(
 
         "Your profile has been successfully saved.",
 
+        HorizontalRule(),
+
         "Player Name: " + state.player_name,
 
         "Training Goal: " + state.goal,
 
         "Favorite Shot: " + state.favorite_shot,
+
+        HorizontalRule(),
 
         Button("Back to Home", index),
 
