@@ -16,168 +16,270 @@ set_site_information(
     planning="Badminton Performance Tracker Final Project Mockup and Implementing Requirements.",
     links=[
         "https://github.com/dannyn-68/badminton-performance-tracker",
-        "https://drafter-edu.github.io/drafter/"
+        "https://drafter-edu.github.io/drafter/",
+        "https://drafter-edu.github.io/drafter/reference/components/layout/div/"
     ]
 )
 
 
 # ==========================================
-# WEBSITE DECORATION
+# ADVANCED TECHNIQUE: CUSTOM CSS
 # ==========================================
 
-set_website_style("default")
+# CSS stands for Cascading Style Sheets.
+# It is used to customize the appearance of a website.
+#
+# add_website_css() allows me to add custom CSS
+# to my Drafter website.
+#
+# I use CSS to change background colors, fonts,
+# buttons, borders, spacing, and page layouts.
+#
+# CSS classes begin with a period, such as .hero.
+# A Drafter component can use that CSS class
+# by setting classes="hero".
+#
+# Source:
+# https://drafter-edu.github.io/drafter/
+
+set_website_style("none")
 
 add_website_css("""
 
     body {
-        background-color: #f0fdf4;
-        font-family: Arial, sans-serif;
-    }
-
-    #drafter-body-- {
-        background-color: #f0fdf4;
-        color: #14532d;
-        padding: 24px;
+        background-color: #f1f5f9;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #102a43;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
     }
 
     h1 {
-        color: #14532d;
+        color: #102a43;
         font-size: 34px;
-        text-align: center;
-        margin-bottom: 20px;
+        font-weight: bold;
+        margin: 10px 0 16px;
     }
 
     h2 {
-        color: #166534;
-        font-size: 24px;
+        color: #102a43;
+        font-size: 23px;
+    }
+
+    h3 {
+        color: #15803d;
+        font-size: 18px;
     }
 
     button {
-        background-color: #15803d;
+        background-color: #16a34a;
         color: white;
         border: none;
-        border-radius: 12px;
-        padding: 12px 22px;
-        margin: 6px;
-        font-size: 16px;
+        border-radius: 10px;
+        padding: 13px 22px;
+        font-size: 15px;
         font-weight: bold;
+        margin: 6px 4px;
         cursor: pointer;
         transition: 0.2s;
     }
 
     button:hover {
-        background-color: #166534;
+        background-color: #15803d;
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 5px 12px #b6d8c0;
     }
 
-    input, select {
+    input, select, textarea {
         background-color: white;
-        border: 1px solid #86efac;
-        border-radius: 8px;
-        padding: 10px;
-        margin: 5px 0 12px 0;
+        color: #102a43;
+        border: 2px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 12px;
+        margin: 6px 0 16px;
         font-size: 16px;
-        color: #14532d;
+        width: 100%;
+        box-sizing: border-box;
     }
 
-    input:focus, select:focus {
+    input:focus, select:focus, textarea:focus {
         border-color: #16a34a;
         outline: none;
-        box-shadow: 0 0 5px #86efac;
+        box-shadow: 0 0 0 3px #dcfce7;
     }
 
     hr {
         border: none;
-        height: 2px;
-        background-color: #bbf7d0;
+        height: 1px;
+        background-color: #cbd5e1;
         margin: 24px 0;
+    }
+
+    .dashboard {
+        max-width: 1050px;
+        margin: 0 auto;
+    }
+
+    .topbar {
+        background-color: #102a43;
+        color: white;
+        border-radius: 14px;
+        padding: 16px 24px;
+        margin-bottom: 18px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-size: 14px;
     }
 
     .hero {
         background: linear-gradient(
-            135deg, #14532d, #16a34a
+            135deg, #102a43, #14532d
         );
         color: white;
-        padding: 35px 20px;
-        border-radius: 18px;
-        text-align: center;
-        margin-bottom: 20px;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        border-radius: 22px;
+        padding: 38px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 20px #cbd5e1;
+        border-bottom: 5px solid #86efac;
     }
 
-    .tagline {
-        text-align: center;
-        color: #16a34a;
-        font-size: 15px;
+    .hero h1 {
+        color: white;
+        font-size: 38px;
+    }
+
+    .hero h2 {
+        color: #dcfce7;
+    }
+
+    .hero button {
+        background-color: #86efac;
+        color: #14532d;
+        margin-top: 20px;
+    }
+
+    .hero button:hover {
+        background-color: #bbf7d0;
+    }
+
+    .eyebrow {
+        color: #86efac;
+        font-size: 13px;
         font-weight: bold;
         letter-spacing: 3px;
-        margin-bottom: 20px;
+        margin-bottom: 12px;
     }
 
-    .intro {
-        text-align: center;
-        color: #166534;
+    .hero-description {
+        color: #dcfce7;
         font-size: 17px;
-        line-height: 1.6;
-        margin-bottom: 20px;
+        margin: 12px 0;
+    }
+
+    .section-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #102a43;
+        margin: 26px 0 14px;
+    }
+
+    .section-card {
+        background-color: white;
+        border-radius: 16px;
+        padding: 24px;
+        margin: 18px 0;
+        box-shadow: 0 4px 14px #dbe4ed;
+        border-left: 5px solid #22c55e;
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(170px, 1fr));
+        gap: 16px;
+        margin: 20px 0;
+    }
+
+    .navigation-grid {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+        margin: 20px 0;
     }
 
     .stat-card {
         background-color: white;
-        border: 1px solid #bbf7d0;
-        border-left: 6px solid #22c55e;
-        border-radius: 12px;
-        padding: 18px;
-        margin: 10px 0;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        color: #15803d;
         font-size: 20px;
         font-weight: bold;
-        color: #14532d;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+        box-shadow: 0 4px 12px #dbe4ed;
     }
 
-    .goal-card {
-        background-color: #dcfce7;
-        border-radius: 12px;
-        padding: 18px;
-        margin: 12px 0;
-        color: #166534;
-        line-height: 1.6;
+    .stat-icon {
+        font-size: 28px;
+        margin-bottom: 8px;
     }
 
-    .success-card {
-        background-color: #dcfce7;
-        border: 1px solid #86efac;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 15px 0;
-        color: #166534;
+    .stat-value {
+        font-size: 30px;
         font-weight: bold;
-        text-align: center;
+        color: #15803d;
+        margin: 6px 0;
     }
 
-    .error-card {
-        background-color: #fef2f2;
-        border: 1px solid #fca5a5;
-        border-radius: 12px;
-        padding: 18px;
-        margin: 15px 0;
-        color: #991b1b;
+    .stat-label {
+        font-size: 14px;
+        color: #64748b;
+        font-weight: bold;
     }
 
     .match-card {
         background-color: white;
-        border: 1px solid #bbf7d0;
-        border-radius: 12px;
-        padding: 15px;
-        margin: 10px 0;
+        border-radius: 18px;
+        padding: 24px;
+        margin: 18px 0;
+        border-left: 6px solid #16a34a;
+        box-shadow: 0 4px 12px #dbe4ed;
+    }
+
+    .goal-card {
+        background-color: white;
+        border-left: 5px solid #22c55e;
+        border-radius: 16px;
+        padding: 20px;
+        margin: 18px 0;
+        color: #102a43;
+        box-shadow: 0 4px 14px #dbe4ed;
+    }
+
+    .success-card {
+        background-color: #f0fdf4;
+        border: 2px solid #86efac;
+        border-radius: 18px;
+        padding: 28px;
+        margin: 20px 0;
+        text-align: center;
         color: #14532d;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    }
+
+    .error-card {
+        background-color: #fef2f2;
+        border: 2px solid #fca5a5;
+        border-radius: 18px;
+        padding: 28px;
+        margin: 20px 0;
+        color: #b91c1c;
     }
 
     .win-label {
         background-color: #dcfce7;
-        color: #166534;
+        color: #15803d;
         border-radius: 8px;
         padding: 10px;
         font-weight: bold;
@@ -185,18 +287,60 @@ add_website_css("""
 
     .loss-label {
         background-color: #fee2e2;
-        color: #991b1b;
+        color: #b91c1c;
         border-radius: 8px;
         padding: 10px;
         font-weight: bold;
+    }
+
+    .tip-card {
+        background-color: #ecfdf5;
+        border: 1px solid #bbf7d0;
+        border-radius: 14px;
+        padding: 20px;
+        margin: 20px 0;
+        color: #14532d;
     }
 
     .footer {
         text-align: center;
         color: #64748b;
         font-size: 13px;
-        padding: 20px;
-        margin-top: 25px;
+        padding: 24px;
+        margin-top: 30px;
+        border-top: 1px solid #cbd5e1;
+    }
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 10px;
+        }
+
+        .hero {
+            padding: 24px;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+        }
+
+        .stat-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+
+        .stat-value {
+            font-size: 22px;
+        }
+
+        .section-card {
+            padding: 18px;
+        }
+
+        .navigation-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
 """)
@@ -229,24 +373,101 @@ class State:
 
 
 # ==========================================
+# ADVANCED TECHNIQUE: DIV
+# ==========================================
+
+# Div is a Drafter component that groups multiple
+# website components into a single container.
+#
+# A Div can contain text, headers, buttons,
+# input fields, or other Div components.
+#
+# I use Div to organize my website into sections,
+# such as the welcome banner, performance cards,
+# navigation buttons, and training goals.
+#
+# The classes parameter connects a Div to a CSS
+# class defined in add_website_css().
+#
+# For example:
+#
+# Div(
+#     Header("Welcome"),
+#     "Track your badminton performance.",
+#     classes="hero"
+# )
+#
+# The hero CSS class gives the entire container
+# a gradient background, padding, rounded corners,
+# and other decorations.
+#
+# A Div can also contain other Div components.
+# This is called nesting.
+#
+# Using nested Div components allows me to create
+# organized sections and responsive card layouts.
+#
+# Source:
+# https://drafter-edu.github.io/drafter/reference/components/layout/div/
+
+
+# ==========================================
+# HELPER FUNCTION: PERFORMANCE CARD
+# ==========================================
+
+def stat_card(icon: str, value: str, label: str) -> Div:
+    """
+    Creates a styled performance card.
+
+    Args:
+        icon: An emoji representing the statistic.
+        value: The numerical value as a string.
+        label: The name of the statistic.
+
+    Returns:
+        A Div containing the icon, value, and label.
+
+    This function uses nested Div components
+    to style each part of the performance card.
+
+    The outer Div uses the stat-card CSS class.
+    Each inner Div uses a different CSS class
+    to customize its appearance.
+    """
+
+    return Div(
+        Div(icon, classes="stat-icon"),
+
+        Div(value, classes="stat-value"),
+
+        Div(label, classes="stat-label"),
+
+        classes="stat-card"
+    )
+
+
+# ==========================================
 # ROUTE 1: HOME PAGE
 # ==========================================
 
 @route
 def index(state: State) -> Page:
 
-    # Calculate wins and losses.
+    # Calculate total wins and losses.
 
     wins = 0
     losses = 0
 
     for match in state.matches:
+
         if match.result == "Win":
             wins += 1
+
         else:
             losses += 1
 
     # Calculate win percentage.
+    # Avoid division by zero if there are no matches.
 
     win_rate = 0.0
 
@@ -255,96 +476,262 @@ def index(state: State) -> Page:
 
     return Page(state, [
 
-        Header("🏸 Badminton Performance Tracker"),
+        # The outer Div groups the entire homepage.
+        # The dashboard CSS class controls its width
+        # and centers it on the screen.
 
-        Text(
-            "TRACK. ANALYZE. IMPROVE.",
-            classes="tagline"
-        ),
+        Div(
 
-        # Welcome banner
+            # ==================================
+            # TOP NAVIGATION BAR
+            # ==================================
 
-        Text(
-            "Welcome, " + state.player_name + "!",
-            classes="hero",
-            style_font_size="30px",
-            style_font_weight="bold"
-        ),
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
 
-        Text(
-            "Every match is a chance to improve. "
-            "Track your performance and take your "
-            "badminton skills to the next level.",
-            classes="intro"
-        ),
+            # ==================================
+            # WELCOME BANNER
+            # ==================================
 
-        HorizontalRule(),
+            # This Div groups the welcome heading,
+            # description, and Record Match button.
+            # The hero class gives the entire group
+            # a navy-to-green gradient background.
 
-        # Performance overview
+            Div(
 
-        Header("📊 Performance Overview"),
+                Div(
+                    "TRAIN. TRACK. IMPROVE.",
+                    classes="eyebrow"
+                ),
 
-        Text(
-            "🏸 Matches Played: "
-            + str(len(state.matches)),
-            classes="stat-card"
-        ),
+                Header("🏸 Elevate Your Game."),
 
-        Text(
-            "🏆 Total Wins: " + str(wins),
-            classes="stat-card"
-        ),
+                Header(
+                    "Welcome, " + state.player_name + "!",
+                    2
+                ),
 
-        Text(
-            "🎯 Total Losses: " + str(losses),
-            classes="stat-card"
-        ),
+                Div(
+                    "Every match is a chance to get better. "
+                    "Track your performance, discover your "
+                    "strengths, and reach your goals.",
+                    classes="hero-description"
+                ),
 
-        Text(
-            "📈 Win Rate: "
-            + str(round(win_rate, 2)) + "%",
-            classes="stat-card"
-        ),
+                Button(
+                    "+ Record a Match",
+                    record_match
+                ),
 
-        HorizontalRule(),
+                classes="hero"
+            ),
 
-        # Navigation
+            # ==================================
+            # PERFORMANCE OVERVIEW
+            # ==================================
 
-        Header("⚡ Quick Navigation"),
+            Div(
+                "Your Performance Overview",
+                classes="section-title"
+            ),
 
-        Button("📝 Record Match", record_match),
+            # This Div contains four performance cards.
+            # The stat-grid CSS class uses a grid layout
+            # to display the cards next to each other.
 
-        Button("📋 Match History", match_history),
+            Div(
 
-        Button("📊 Performance Statistics", statistics),
+                stat_card(
+                    "🏸",
+                    str(len(state.matches)),
+                    "Matches Recorded"
+                ),
 
-        Button("💡 Strategy Tips", strategy_tips),
+                stat_card(
+                    "🏆",
+                    str(wins),
+                    "Total Wins"
+                ),
 
-        Button("👤 My Profile", profile),
+                stat_card(
+                    "🎯",
+                    str(losses),
+                    "Total Losses"
+                ),
 
-        HorizontalRule(),
+                stat_card(
+                    "📈",
+                    str(round(win_rate, 2)) + "%",
+                    "Win Rate"
+                ),
 
-        # Player information
+                classes="stat-grid"
+            ),
 
-        Header("🎯 Your Training Journey"),
+            # ==================================
+            # TRAINING GOAL
+            # ==================================
 
-        Text(
-            "Training Goal: " + state.goal,
-            classes="goal-card"
-        ),
+            Div(
 
-        Text(
-            "Favorite Shot: " + state.favorite_shot,
-            classes="goal-card"
-        ),
+                Header("🎯 Your Training Goal", 2),
 
-        # Footer
+                Div(state.goal),
 
-        Text(
-            "🏸 Badminton Performance Tracker | "
-            "Created by Danny Nguyen | "
-            "Built with Python & Drafter",
-            classes="footer"
+                Div(
+                    "Favorite Shot: "
+                    + state.favorite_shot
+                ),
+
+                Button(
+                    "Update Goal",
+                    profile
+                ),
+
+                classes="section-card"
+            ),
+
+            # ==================================
+            # DASHBOARD NAVIGATION
+            # ==================================
+
+            Div(
+                "Explore Your Dashboard",
+                classes="section-title"
+            ),
+
+            # Each navigation card is a separate Div.
+            # The outer Div arranges the cards
+            # into a responsive grid layout.
+
+            Div(
+
+                Div(
+
+                    Header("🏸 Record Match", 2),
+
+                    Div(
+                        "Log your points, errors, "
+                        "smashes, and serves."
+                    ),
+
+                    Button(
+                        "Record Match",
+                        record_match
+                    ),
+
+                    classes="section-card"
+                ),
+
+                Div(
+
+                    Header("📋 Match History", 2),
+
+                    Div(
+                        "Review your previously "
+                        "recorded matches."
+                    ),
+
+                    Button(
+                        "Match History",
+                        match_history
+                    ),
+
+                    classes="section-card"
+                ),
+
+                Div(
+
+                    Header("📊 Statistics", 2),
+
+                    Div(
+                        "Analyze your success rates "
+                        "and overall performance."
+                    ),
+
+                    Button(
+                        "View Statistics",
+                        statistics
+                    ),
+
+                    classes="section-card"
+                ),
+
+                Div(
+
+                    Header("💡 Strategy Tips", 2),
+
+                    Div(
+                        "Get personalized training "
+                        "recommendations."
+                    ),
+
+                    Button(
+                        "Strategy Tips",
+                        strategy_tips
+                    ),
+
+                    classes="section-card"
+                ),
+
+                Div(
+
+                    Header("👤 My Profile", 2),
+
+                    Div(
+                        "Personalize your name, goals, "
+                        "and favorite shot."
+                    ),
+
+                    Button(
+                        "My Profile",
+                        profile
+                    ),
+
+                    classes="section-card"
+                ),
+
+                classes="navigation-grid"
+            ),
+
+            # ==================================
+            # TRAINING TIP
+            # ==================================
+
+            Div(
+
+                Header("💡 Training Tip", 2),
+
+                Div(
+                    "Focus on consistency before power. "
+                    "Reducing unforced errors can make "
+                    "a big difference in your matches."
+                ),
+
+                classes="tip-card"
+            ),
+
+            # ==================================
+            # FOOTER
+            # ==================================
+
+            Div(
+
+                "Badminton Performance Tracker",
+
+                Div("Train. Track. Improve."),
+
+                Div(
+                    "Designed by Danny Nguyen | 2026"
+                ),
+
+                classes="footer"
+            ),
+
+            classes="dashboard"
         )
     ])
 
@@ -358,68 +745,102 @@ def record_match(state: State) -> Page:
 
     return Page(state, [
 
-        Header("📝 Record a Match"),
+        Div(
 
-        Text(
-            "Enter your latest match results and track "
-            "your progress on the court.",
-            classes="goal-card"
-        ),
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
 
-        Header("🏸 Match Information"),
+            Header("📝 Record a Match"),
 
-        "Opponent:",
-        TextBox("opponent", ""),
+            Div(
+                "Enter your latest match results "
+                "and track your progress.",
+                classes="goal-card"
+            ),
 
-        "Match Date (MM/DD/YYYY):",
-        TextBox("date", ""),
+            # Match information section
 
-        "Match Result:",
-        SelectBox("result", ["Win", "Loss"], "Win"),
+            Div(
 
-        HorizontalRule(),
+                Header("🏸 Match Information", 2),
 
-        Header("🎯 Point Statistics"),
+                "Opponent:",
+                TextBox("opponent", ""),
 
-        "Points Won:",
-        TextBox("points_won", "0"),
+                "Match Date (MM/DD/YYYY):",
+                TextBox("date", ""),
 
-        "Total Points:",
-        TextBox("total_points", "0"),
+                "Match Result:",
+                SelectBox(
+                    "result",
+                    ["Win", "Loss"],
+                    "Win"
+                ),
 
-        "Errors:",
-        TextBox("errors", "0"),
+                classes="section-card"
+            ),
 
-        HorizontalRule(),
+            # Point statistics section
 
-        Header("💥 Smash Statistics"),
+            Div(
 
-        "Total Smashes:",
-        TextBox("total_smashes", "0"),
+                Header("🎯 Point Statistics", 2),
 
-        "Successful Smashes:",
-        TextBox("successful_smashes", "0"),
+                "Points Won:",
+                TextBox("points_won", "0"),
 
-        HorizontalRule(),
+                "Total Points:",
+                TextBox("total_points", "0"),
 
-        Header("🏸 Serve Statistics"),
+                "Errors:",
+                TextBox("errors", "0"),
 
-        "Total Serves:",
-        TextBox("total_serves", "0"),
+                classes="section-card"
+            ),
 
-        "Successful Serves:",
-        TextBox("successful_serves", "0"),
+            # Smash statistics section
 
-        HorizontalRule(),
+            Div(
 
-        Button("💾 Save Match", save_match),
+                Header("💥 Smash Statistics", 2),
 
-        Button("🏠 Back to Home", index),
+                "Total Smashes:",
+                TextBox("total_smashes", "0"),
 
-        Text(
-            "Record your statistics after every match "
-            "to see how much you improve over time.",
-            classes="footer"
+                "Successful Smashes:",
+                TextBox("successful_smashes", "0"),
+
+                classes="section-card"
+            ),
+
+            # Serve statistics section
+
+            Div(
+
+                Header("🏸 Serve Statistics", 2),
+
+                "Total Serves:",
+                TextBox("total_serves", "0"),
+
+                "Successful Serves:",
+                TextBox("successful_serves", "0"),
+
+                classes="section-card"
+            ),
+
+            Button("💾 Save Match", save_match),
+
+            Button("🏠 Back to Home", index),
+
+            Div(
+                "Record your statistics after every "
+                "match to see your improvement.",
+                classes="footer"
+            ),
+
+            classes="dashboard"
         )
     ])
 
@@ -444,10 +865,16 @@ def save_match(
 ) -> Page:
 
     # Advanced technique: Exception handling.
-    # Convert TextBox strings into integers.
-    # Catch invalid inputs instead of crashing.
+    #
+    # TextBox inputs are strings.
+    # The try block converts them into integers.
+    # If a user enters invalid text, int() raises
+    # a ValueError.
+    # The except block catches the error and
+    # displays a message instead of crashing.
 
     try:
+
         won = int(points_won)
         total = int(total_points)
         error_count = int(errors)
@@ -457,11 +884,12 @@ def save_match(
         good_serves = int(successful_serves)
 
     except ValueError:
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Please enter whole numbers "
                 "for all statistics.",
                 classes="error-card"
@@ -475,11 +903,12 @@ def save_match(
     # Check the opponent's name.
 
     if opponent.strip() == "":
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Please enter your opponent's name.",
                 classes="error-card"
             ),
@@ -490,11 +919,12 @@ def save_match(
     # Check the match date.
 
     if date.strip() == "":
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Please enter the match date.",
                 classes="error-card"
             ),
@@ -505,11 +935,12 @@ def save_match(
     # Check the match result.
 
     if result != "Win" and result != "Loss":
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Please select Win or Loss.",
                 classes="error-card"
             ),
@@ -517,14 +948,15 @@ def save_match(
             Button("Try Again", record_match)
         ])
 
-    # Check point statistics.
+    # Check the point statistics.
 
     if total <= 0 or won < 0 or won > total:
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Points won must be between 0 "
                 "and total points. Total points "
                 "must be greater than zero.",
@@ -534,14 +966,15 @@ def save_match(
             Button("Try Again", record_match)
         ])
 
-    # Check the number of errors.
+    # Check the error count.
 
     if error_count < 0:
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "The number of errors cannot be negative.",
                 classes="error-card"
             ),
@@ -549,14 +982,15 @@ def save_match(
             Button("Try Again", record_match)
         ])
 
-    # Check smash statistics.
+    # Check the smash statistics.
 
     if smashes < 0 or good_smashes < 0 or good_smashes > smashes:
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Successful smashes must be between "
                 "0 and total smashes.",
                 classes="error-card"
@@ -565,14 +999,15 @@ def save_match(
             Button("Try Again", record_match)
         ])
 
-    # Check serve statistics.
+    # Check the serve statistics.
 
     if serves < 0 or good_serves < 0 or good_serves > serves:
+
         return Page(state, [
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Successful serves must be between "
                 "0 and total serves.",
                 classes="error-card"
@@ -601,55 +1036,81 @@ def save_match(
     state.matches.append(new_match)
 
     # Meaningful conditional:
-    # Display a message based on the result.
+    # Display a message based on the match result.
 
     if result == "Win":
         message = "🏆 Congratulations on your win!"
+
     else:
         message = "💪 Keep practicing and improving!"
 
     return Page(state, [
 
-        Header("🎉 Match Saved Successfully!"),
+        Div(
 
-        Text(
-            "Your match against " + opponent
-            + " has been successfully recorded.",
-            classes="success-card"
-        ),
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
 
-        HorizontalRule(),
+            Header("🎉 Match Saved Successfully!"),
 
-        Text(
-            "📅 Match Date: " + date,
-            classes="match-card"
-        ),
+            Div(
 
-        Text(
-            "🏸 Match Result: " + result,
-            classes="match-card"
-        ),
+                Header("Match Recorded!", 2),
 
-        Text(
-            message,
-            classes="goal-card"
-        ),
+                "Your match against " + opponent
+                + " has been successfully recorded.",
 
-        Text(
-            "Total Matches Recorded: "
-            + str(len(state.matches)),
-            classes="stat-card"
-        ),
+                Div(message),
 
-        HorizontalRule(),
+                classes="success-card"
+            ),
 
-        Button("📝 Record Another Match", record_match),
+            Div(
 
-        Button("📋 View Match History", match_history),
+                Header("Match Summary", 2),
 
-        Button("📊 View Statistics", statistics),
+                Div("Opponent: " + opponent),
 
-        Button("🏠 Back to Home", index)
+                Div("📅 Date: " + date),
+
+                Div("Result: " + result),
+
+                Div(
+                    "Points Won: "
+                    + str(won)
+                    + "/" + str(total)
+                ),
+
+                classes="match-card"
+            ),
+
+            stat_card(
+                "🏸",
+                str(len(state.matches)),
+                "Total Matches Recorded"
+            ),
+
+            Button(
+                "📝 Record Another Match",
+                record_match
+            ),
+
+            Button(
+                "📋 View Match History",
+                match_history
+            ),
+
+            Button(
+                "📊 View Statistics",
+                statistics
+            ),
+
+            Button("🏠 Back to Home", index),
+
+            classes="dashboard"
+        )
     ])
 
 
@@ -662,21 +1123,27 @@ def match_history(state: State) -> Page:
 
     content = [
 
+        Div(
+            "🏸 BADMINTON PERFORMANCE TRACKER",
+            classes="topbar"
+        ),
+
         Header("📋 Match History"),
 
-        Text(
-            "Review your previously recorded matches "
-            "and celebrate your progress.",
+        Div(
+            "Review your previously recorded "
+            "matches and celebrate your progress.",
             classes="goal-card"
         )
     ]
 
-    # Check whether there are any matches.
+    # Check whether the player has recorded matches.
 
     if len(state.matches) == 0:
 
         content.append(
-            Text(
+
+            Div(
                 "You have not recorded any matches yet. "
                 "Record your first match to get started!",
                 classes="match-card"
@@ -686,86 +1153,80 @@ def match_history(state: State) -> Page:
     match_number = 1
 
     # Meaningful loop:
-    # Iterate over Match instances in State.
-    # Display the statistics of every match.
+    # Iterate through the list of Match instances
+    # in State and display each recorded match.
+    #
+    # Each match is grouped inside a Div so that
+    # all its information appears in one card.
 
     for match in state.matches:
 
-        content.append(HorizontalRule())
-
-        content.append(
-            Header("🏸 Match " + str(match_number))
-        )
-
-        content.append(
-            Text(
-                "Opponent: " + match.opponent,
-                classes="match-card"
-            )
-        )
-
-        content.append(
-            Text(
-                "📅 Date: " + match.date,
-                classes="match-card"
-            )
-        )
-
-        # Display wins in green and losses in red.
+        # Choose the color of the result label.
 
         if match.result == "Win":
-            content.append(
-                Text(
-                    "🏆 Result: WIN",
-                    classes="win-label"
-                )
+
+            result_label = Div(
+                "🏆 Result: WIN",
+                classes="win-label"
             )
 
         else:
-            content.append(
-                Text(
-                    "Result: LOSS",
-                    classes="loss-label"
-                )
+
+            result_label = Div(
+                "Result: LOSS",
+                classes="loss-label"
             )
 
-        content.append(
-            Text(
-                "🎯 Points Won: "
-                + str(match.points_won)
-                + "/" + str(match.total_points),
-                classes="match-card"
-            )
-        )
+        # Create a card for the current match.
 
         content.append(
-            Text(
-                "Errors: " + str(match.errors),
-                classes="match-card"
-            )
-        )
 
-        content.append(
-            Text(
-                "💥 Successful Smashes: "
-                + str(match.successful_smashes)
-                + "/" + str(match.total_smashes),
-                classes="match-card"
-            )
-        )
+            Div(
 
-        content.append(
-            Text(
-                "🏸 Successful Serves: "
-                + str(match.successful_serves)
-                + "/" + str(match.total_serves),
+                Header(
+                    "🏸 Match " + str(match_number),
+                    2
+                ),
+
+                Div(
+                    "Opponent: " + match.opponent
+                ),
+
+                Div(
+                    "📅 Date: " + match.date
+                ),
+
+                result_label,
+
+                HorizontalRule(),
+
+                Div(
+                    "🎯 Points Won: "
+                    + str(match.points_won)
+                    + "/" + str(match.total_points)
+                ),
+
+                Div(
+                    "Errors: " + str(match.errors)
+                ),
+
+                Div(
+                    "💥 Successful Smashes: "
+                    + str(match.successful_smashes)
+                    + "/" + str(match.total_smashes)
+                ),
+
+                Div(
+                    "🏸 Successful Serves: "
+                    + str(match.successful_serves)
+                    + "/" + str(match.total_serves)
+                ),
+
                 classes="match-card"
             )
         )
 
         match_number += 1
-
-    content.append(HorizontalRule())
 
     content.append(
         Button("📝 Record Match", record_match)
@@ -777,6 +1238,14 @@ def match_history(state: State) -> Page:
 
     content.append(
         Button("🏠 Back to Home", index)
+    )
+
+    content.append(
+
+        Div(
+            "Every match is an opportunity to improve.",
+            classes="footer"
+        )
     )
 
     return Page(state, content)
@@ -797,7 +1266,7 @@ def statistics(state: State) -> Page:
 
             Header("📊 Performance Statistics"),
 
-            Text(
+            Div(
                 "Record a match to unlock your "
                 "performance statistics!",
                 classes="goal-card"
@@ -827,6 +1296,7 @@ def statistics(state: State) -> Page:
 
         if match.result == "Win":
             wins += 1
+
         else:
             losses += 1
 
@@ -857,14 +1327,20 @@ def statistics(state: State) -> Page:
     smash_rate = 0.0
 
     if total_smashes > 0:
-        smash_rate = successful_smashes / total_smashes * 100
+
+        smash_rate = (
+            successful_smashes / total_smashes * 100
+        )
 
     # Calculate serve success rate.
 
     serve_rate = 0.0
 
     if total_serves > 0:
-        serve_rate = successful_serves / total_serves * 100
+
+        serve_rate = (
+            successful_serves / total_serves * 100
+        )
 
     # Calculate average errors per match.
 
@@ -876,130 +1352,181 @@ def statistics(state: State) -> Page:
 
     return Page(state, [
 
-        Header("📊 Performance Statistics"),
+        Div(
 
-        Text(
-            "Understand your strengths and discover "
-            "opportunities to improve your game.",
-            classes="goal-card"
-        ),
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
 
-        Header("🏆 Match Overview"),
+            Header("📊 Performance Statistics"),
 
-        Text(
-            "Total Matches: "
-            + str(len(state.matches)),
-            classes="stat-card"
-        ),
+            Div(
+                "Understand your strengths and discover "
+                "opportunities to improve your game.",
+                classes="goal-card"
+            ),
 
-        Text(
-            "Wins: " + str(wins),
-            classes="stat-card"
-        ),
+            # Match overview
 
-        Text(
-            "Losses: " + str(losses),
-            classes="stat-card"
-        ),
+            Header("🏆 Match Overview", 2),
 
-        Text(
-            "Win Rate: "
-            + str(round(win_rate, 2)) + "%",
-            classes="stat-card"
-        ),
+            Div(
 
-        HorizontalRule(),
+                stat_card(
+                    "🏸",
+                    str(len(state.matches)),
+                    "Total Matches"
+                ),
 
-        Header("🎯 Point Statistics"),
+                stat_card(
+                    "🏆",
+                    str(wins),
+                    "Wins"
+                ),
 
-        Text(
-            "Total Points Won: " + str(points_won),
-            classes="match-card"
-        ),
+                stat_card(
+                    "🎯",
+                    str(losses),
+                    "Losses"
+                ),
 
-        Text(
-            "Total Points Played: " + str(total_points),
-            classes="match-card"
-        ),
+                stat_card(
+                    "📈",
+                    str(round(win_rate, 2)) + "%",
+                    "Win Rate"
+                ),
 
-        Text(
-            "Point Win Rate: "
-            + str(round(point_rate, 2)) + "%",
-            classes="stat-card"
-        ),
+                classes="stat-grid"
+            ),
 
-        HorizontalRule(),
+            # Point statistics
 
-        Header("💥 Smash Statistics"),
+            Div(
 
-        Text(
-            "Total Smashes: " + str(total_smashes),
-            classes="match-card"
-        ),
+                Header("🎯 Point Statistics", 2),
 
-        Text(
-            "Successful Smashes: "
-            + str(successful_smashes),
-            classes="match-card"
-        ),
+                Div(
+                    "Total Points Won: "
+                    + str(points_won)
+                ),
 
-        Text(
-            "Smash Success Rate: "
-            + str(round(smash_rate, 2)) + "%",
-            classes="stat-card"
-        ),
+                Div(
+                    "Total Points Played: "
+                    + str(total_points)
+                ),
 
-        HorizontalRule(),
+                stat_card(
+                    "🎯",
+                    str(round(point_rate, 2)) + "%",
+                    "Point Win Rate"
+                ),
 
-        Header("🏸 Serve Statistics"),
+                classes="section-card"
+            ),
 
-        Text(
-            "Total Serves: " + str(total_serves),
-            classes="match-card"
-        ),
+            # Smash statistics
 
-        Text(
-            "Successful Serves: "
-            + str(successful_serves),
-            classes="match-card"
-        ),
+            Div(
 
-        Text(
-            "Serve Success Rate: "
-            + str(round(serve_rate, 2)) + "%",
-            classes="stat-card"
-        ),
+                Header("💥 Smash Statistics", 2),
 
-        HorizontalRule(),
+                Div(
+                    "Total Smashes: "
+                    + str(total_smashes)
+                ),
 
-        Header("⚠️ Error Statistics"),
+                Div(
+                    "Successful Smashes: "
+                    + str(successful_smashes)
+                ),
 
-        Text(
-            "Total Errors: " + str(errors),
-            classes="match-card"
-        ),
+                stat_card(
+                    "💥",
+                    str(round(smash_rate, 2)) + "%",
+                    "Smash Success Rate"
+                ),
 
-        Text(
-            "Average Errors per Match: "
-            + str(round(average_errors, 2)),
-            classes="stat-card"
-        ),
+                classes="section-card"
+            ),
 
-        Text(
-            "Errors per 100 Points: "
-            + str(round(error_rate, 2)),
-            classes="stat-card"
-        ),
+            # Serve statistics
 
-        HorizontalRule(),
+            Div(
 
-        Button("💡 View Strategy Tips", strategy_tips),
+                Header("🏸 Serve Statistics", 2),
 
-        Button("📋 Match History", match_history),
+                Div(
+                    "Total Serves: "
+                    + str(total_serves)
+                ),
 
-        Button("📝 Record Match", record_match),
+                Div(
+                    "Successful Serves: "
+                    + str(successful_serves)
+                ),
 
-        Button("🏠 Back to Home", index)
+                stat_card(
+                    "🏸",
+                    str(round(serve_rate, 2)) + "%",
+                    "Serve Success Rate"
+                ),
+
+                classes="section-card"
+            ),
+
+            # Error statistics
+
+            Div(
+
+                Header("⚠️ Error Statistics", 2),
+
+                Div(
+                    "Total Errors: " + str(errors)
+                ),
+
+                Div(
+
+                    stat_card(
+                        "🎯",
+                        str(round(average_errors, 2)),
+                        "Average Errors per Match"
+                    ),
+
+                    stat_card(
+                        "📊",
+                        str(round(error_rate, 2)),
+                        "Errors per 100 Points"
+                    ),
+
+                    classes="stat-grid"
+                ),
+
+                classes="section-card"
+            ),
+
+            Button(
+                "💡 View Strategy Tips",
+                strategy_tips
+            ),
+
+            Button(
+                "📋 Match History",
+                match_history
+            ),
+
+            Button(
+                "📝 Record Match",
+                record_match
+            ),
+
+            Button(
+                "🏠 Back to Home",
+                index
+            ),
+
+            classes="dashboard"
+        )
     ])
 
 
@@ -1010,7 +1537,7 @@ def statistics(state: State) -> Page:
 @route
 def strategy_tips(state: State) -> Page:
 
-    # Check whether there are recorded matches.
+    # Check whether the player has recorded matches.
 
     if len(state.matches) == 0:
 
@@ -1018,7 +1545,7 @@ def strategy_tips(state: State) -> Page:
 
             Header("💡 Strategy Tips"),
 
-            Text(
+            Div(
                 "Record your first match to receive "
                 "personalized training recommendations.",
                 classes="goal-card"
@@ -1037,7 +1564,7 @@ def strategy_tips(state: State) -> Page:
     successful_serves = 0
     total_errors = 0
 
-    # Calculate totals from all matches.
+    # Calculate totals from all recorded matches.
 
     for match in state.matches:
 
@@ -1056,172 +1583,191 @@ def strategy_tips(state: State) -> Page:
     smash_rate = 0.0
 
     if total_smashes > 0:
-        smash_rate = successful_smashes / total_smashes * 100
+
+        smash_rate = (
+            successful_smashes / total_smashes * 100
+        )
 
     # Calculate serve success rate.
 
     serve_rate = 0.0
 
     if total_serves > 0:
-        serve_rate = successful_serves / total_serves * 100
+
+        serve_rate = (
+            successful_serves / total_serves * 100
+        )
 
     # Calculate average errors.
 
     average_errors = total_errors / len(state.matches)
 
-    content = [
-
-        Header("💡 Personalized Strategy Tips"),
-
-        Text(
-            "These recommendations are based on "
-            "your recorded match statistics.",
-            classes="goal-card"
-        ),
-
-        Header("💥 Improve Your Smash")
-    ]
+    # ==========================================
+    # SMASH RECOMMENDATION
+    # ==========================================
 
     # Meaningful conditional:
-    # Recommend smash practice if accuracy is below 60%.
+    # Recommend smash practice when the player's
+    # smash success rate is below 60%.
 
     if total_smashes == 0:
 
-        content.append(
-            Text(
-                "Record some smashes to receive "
-                "smash-specific recommendations.",
-                classes="goal-card"
-            )
+        smash_message = (
+            "Record some smashes to receive "
+            "smash-specific recommendations."
         )
 
     elif smash_rate < 60:
 
-        content.append(
-            Text(
-                "Your smash success rate is "
-                + str(round(smash_rate, 2))
-                + "%. Focus on timing, placement, "
-                "and accuracy before increasing power.",
-                classes="goal-card"
-            )
+        smash_message = (
+            "Your smash success rate is "
+            + str(round(smash_rate, 2))
+            + "%. Focus on timing, placement, "
+            "and accuracy before increasing power."
         )
 
     else:
 
-        content.append(
-            Text(
-                "Great job! Your smash success rate is "
-                + str(round(smash_rate, 2))
-                + "%. Keep improving your placement "
-                "and shot selection.",
-                classes="success-card"
-            )
+        smash_message = (
+            "Great job! Your smash success rate is "
+            + str(round(smash_rate, 2))
+            + "%. Keep improving your placement "
+            "and shot selection."
         )
 
-    content.append(HorizontalRule())
-
-    content.append(
-        Header("🏸 Improve Your Serve")
-    )
+    # ==========================================
+    # SERVE RECOMMENDATION
+    # ==========================================
 
     # Meaningful conditional:
-    # Recommend serve practice if success is below 80%.
+    # Recommend serve practice when the player's
+    # serve success rate is below 80%.
 
     if total_serves == 0:
 
-        content.append(
-            Text(
-                "Record some serves to receive "
-                "serve-specific recommendations.",
-                classes="goal-card"
-            )
+        serve_message = (
+            "Record some serves to receive "
+            "serve-specific recommendations."
         )
 
     elif serve_rate < 80:
 
-        content.append(
-            Text(
-                "Your serve success rate is "
-                + str(round(serve_rate, 2))
-                + "%. Practice consistent low serves "
-                "and focus on accuracy.",
-                classes="goal-card"
-            )
+        serve_message = (
+            "Your serve success rate is "
+            + str(round(serve_rate, 2))
+            + "%. Practice consistent low serves "
+            "and focus on accuracy."
         )
 
     else:
 
-        content.append(
-            Text(
-                "Excellent serving! Your success rate is "
-                + str(round(serve_rate, 2))
-                + "%. Keep practicing different "
-                "serve placements.",
-                classes="success-card"
-            )
+        serve_message = (
+            "Excellent serving! Your success rate is "
+            + str(round(serve_rate, 2))
+            + "%. Keep practicing different "
+            "serve placements."
         )
 
-    content.append(HorizontalRule())
-
-    content.append(
-        Header("🎯 Reduce Your Errors")
-    )
+    # ==========================================
+    # ERROR RECOMMENDATION
+    # ==========================================
 
     # Meaningful conditional:
-    # Recommend reducing errors if average exceeds 10.
+    # Recommend reducing errors if the player's
+    # average errors per match is greater than 10.
 
     if average_errors > 10:
 
-        content.append(
-            Text(
-                "You average "
-                + str(round(average_errors, 2))
-                + " errors per match. Focus on "
-                "consistent footwork, safer shots, "
-                "and reducing unforced errors.",
-                classes="goal-card"
-            )
+        error_message = (
+            "You average "
+            + str(round(average_errors, 2))
+            + " errors per match. Focus on "
+            "consistent footwork, safer shots, "
+            "and reducing unforced errors."
         )
 
     else:
 
-        content.append(
-            Text(
-                "Good consistency! You average "
-                + str(round(average_errors, 2))
-                + " errors per match. Keep focusing "
-                "on controlled and accurate shots.",
-                classes="success-card"
-            )
+        error_message = (
+            "Good consistency! You average "
+            + str(round(average_errors, 2))
+            + " errors per match. Keep focusing "
+            "on controlled and accurate shots."
         )
 
-    content.append(HorizontalRule())
+    # Display all recommendations on the page.
 
-    content.append(
-        Header("🔥 Your Training Goal")
-    )
+    return Page(state, [
 
-    content.append(
-        Text(
-            state.goal,
-            classes="stat-card"
+        Div(
+
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
+
+            Header("💡 Personalized Strategy Tips"),
+
+            Div(
+                "These recommendations are based on "
+                "your recorded match statistics.",
+                classes="goal-card"
+            ),
+
+            Div(
+
+                Header("💥 Improve Your Smash", 2),
+
+                Div(smash_message),
+
+                classes="section-card"
+            ),
+
+            Div(
+
+                Header("🏸 Improve Your Serve", 2),
+
+                Div(serve_message),
+
+                classes="section-card"
+            ),
+
+            Div(
+
+                Header("🎯 Reduce Your Errors", 2),
+
+                Div(error_message),
+
+                classes="section-card"
+            ),
+
+            Div(
+
+                Header("🔥 Your Training Goal", 2),
+
+                Div(state.goal),
+
+                Button(
+                    "Update Training Goal",
+                    profile
+                ),
+
+                classes="tip-card"
+            ),
+
+            Button(
+                "📊 View Statistics",
+                statistics
+            ),
+
+            Button(
+                "🏠 Back to Home",
+                index
+            ),
+
+            classes="dashboard"
         )
-    )
-
-    content.append(
-        Button("📊 View Statistics", statistics)
-    )
-
-    content.append(
-        Button("👤 Update Training Goal", profile)
-    )
-
-    content.append(
-        Button("🏠 Back to Home", index)
-    )
-
-    return Page(state, content)
+    ])
 
 
 # ==========================================
@@ -1233,42 +1779,66 @@ def profile(state: State) -> Page:
 
     return Page(state, [
 
-        Header("👤 My Player Profile"),
+        Div(
 
-        Text(
-            "Customize your player information "
-            "and set your personal badminton goals.",
-            classes="goal-card"
-        ),
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
 
-        HorizontalRule(),
+            Header("👤 My Player Profile"),
 
-        Header("🏸 Player Information"),
+            Div(
+                "Customize your player information "
+                "and set your personal badminton goals.",
+                classes="goal-card"
+            ),
 
-        "Player Name:",
-        TextBox("player_name", state.player_name),
+            Div(
 
-        "Training Goal:",
-        TextBox("goal", state.goal),
+                Header("🏸 Player Information", 2),
 
-        "Favorite Shot:",
-        SelectBox(
-            "favorite_shot",
-            [
-                "Smash",
-                "Drop Shot",
-                "Clear",
-                "Drive",
-                "Net Shot"
-            ],
-            state.favorite_shot
-        ),
+                "Player Name:",
+                TextBox(
+                    "player_name",
+                    state.player_name
+                ),
 
-        HorizontalRule(),
+                "Training Goal:",
+                TextBox(
+                    "goal",
+                    state.goal
+                ),
 
-        Button("💾 Save Profile", save_profile),
+                "Favorite Shot:",
 
-        Button("🏠 Back to Home", index)
+                SelectBox(
+                    "favorite_shot",
+                    [
+                        "Smash",
+                        "Drop Shot",
+                        "Clear",
+                        "Drive",
+                        "Net Shot"
+                    ],
+                    state.favorite_shot
+                ),
+
+                classes="section-card"
+            ),
+
+            Button(
+                "💾 Save Profile",
+                save_profile
+            ),
+
+            Button(
+                "🏠 Back to Home",
+                index
+            ),
+
+            classes="dashboard"
+        )
     ])
 
 
@@ -1292,7 +1862,7 @@ def save_profile(
 
             Header("⚠️ Invalid Input"),
 
-            Text(
+            Div(
                 "Please enter your name.",
                 classes="error-card"
             ),
@@ -1300,7 +1870,7 @@ def save_profile(
             Button("Back to Profile", profile)
         ])
 
-    # Meaningfully modify three State fields.
+    # Meaningfully modify three State attributes.
 
     state.player_name = player_name
 
@@ -1310,41 +1880,67 @@ def save_profile(
 
     return Page(state, [
 
-        Header("🎉 Profile Updated!"),
+        Div(
 
-        Text(
-            "Your profile has been successfully saved.",
-            classes="success-card"
-        ),
+            Div(
+                "🏸 BADMINTON PERFORMANCE TRACKER",
+                classes="topbar"
+            ),
 
-        HorizontalRule(),
+            Header("🎉 Profile Updated!"),
 
-        Text(
-            "👤 Player Name: " + state.player_name,
-            classes="stat-card"
-        ),
+            Div(
+                "Your profile has been successfully saved.",
+                classes="success-card"
+            ),
 
-        Text(
-            "🎯 Training Goal: " + state.goal,
-            classes="goal-card"
-        ),
+            Div(
 
-        Text(
-            "🏸 Favorite Shot: " + state.favorite_shot,
-            classes="goal-card"
-        ),
+                Header("👤 Player Information", 2),
 
-        HorizontalRule(),
+                Div(
+                    "Player Name: "
+                    + state.player_name
+                ),
 
-        Button("🏠 Back to Home", index),
+                Div(
+                    "Training Goal: "
+                    + state.goal
+                ),
 
-        Button("✏️ Edit Profile", profile)
+                Div(
+                    "Favorite Shot: "
+                    + state.favorite_shot
+                ),
+
+                classes="section-card"
+            ),
+
+            Button(
+                "🏠 Back to Home",
+                index
+            ),
+
+            Button(
+                "✏️ Edit Profile",
+                profile
+            ),
+
+            classes="dashboard"
+        )
     ])
 
 
 # ==========================================
 # START SERVER
 # ==========================================
+
+# Create the initial State of the website.
+#
+# The matches list starts empty.
+# The default player name is Player.
+# The default goal is to improve badminton skills.
+# The default favorite shot is Smash.
 
 start_server(State(
     [],
